@@ -8,9 +8,7 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix='!')
 
-@bot.event
-async def on_ready():
-    print('bot on')
+@bot.eventㅇㅇ   print('bot on')
 
 @bot.command()
 async def 전적(arg1, arg2, arg3): # arg1 = Nickname, arg2 = krjp/as/kakao... , arg3 = solo/duo/squad
@@ -33,11 +31,65 @@ async def 전적(arg1, arg2, arg3): # arg1 = Nickname, arg2 = krjp/as/kakao... ,
         pubg_to_text = {
             'solo':'1', 'duo':'2', 'squad':'4'
         }
-        # argument process
-        pubg_id = arg1
-        pubg_server = arg2
-        pubg_queue = pubg_to_text[arg3]
-        pubg_link = "https://pubg.op.gg/user/{}?server={}".format(pubg_id,pubg_server)
+from bs4 import BeautifulSoup
+from discord.ext import commands
+
+bot = commands.Bot(command_prefix='!')
+
+@bot.eventㅇㅇ   print('bot on')
+
+@bot.command()
+async def 전적(arg1, arg2, arg3): # arg1 = Nickname, arg2 = krjp/as/kakao... , arg3 = solo/duo/squad
+        pubg_stats = {
+            'rating':0, 'matches_cnt':0, 'win_matches_cnt':0,
+            'topten_matches_cnt':0, 'kills_sum':0, 'kills_max':0,
+            'assists_sum':0, 'headshot_kills_sum':0, 'deaths_sum':0,
+            'longest_kill_max':0, 'rank_avg':0, 'damage_dealt_avg':0,
+            'time_survived_avg':0
+        }
+        pubg_rank = {
+            'your_rank':0,
+            'all_player':0
+        }
+        pubg_text = {
+            'rank':'', 'rating':'', 'win_rating':'',
+            'top_ten':'', 'kd':'', 'avgdmg':'',
+            'head_rate':''
+        }
+        pubg_to_text = {
+            'solo':'1', 'duo':'2', 'squad':'4'
+#-*- coding: utf-8 -*-
+
+import discord
+import requests
+import json
+from bs4 import BeautifulSoup
+from discord.ext import commands
+
+bot = commands.Bot(command_prefix='!')
+
+@bot.eventㅇㅇ   print('bot on')
+
+@bot.command()
+async def 전적(arg1, arg2, arg3): # arg1 = Nickname, arg2 = krjp/as/kakao... , arg3 = solo/duo/squad
+        pubg_stats = {
+            'rating':0, 'matches_cnt':0, 'win_matches_cnt':0,
+            'topten_matches_cnt':0, 'kills_sum':0, 'kills_max':0,
+            'assists_sum':0, 'headshot_kills_sum':0, 'deaths_sum':0,
+            'longest_kill_max':0, 'rank_avg':0, 'damage_dealt_avg':0,
+            'time_survived_avg':0
+        }
+        pubg_rank = {
+            'your_rank':0,
+            'all_player':0
+        }
+        pubg_text = {
+            'rank':'', 'rating':'', 'win_rating':'',
+            'top_ten':'', 'kd':'', 'avgdmg':'',
+            'head_rate':''
+        }
+        pubg_to_text = {
+ ㅇㅇpubg.op.gg/user/{}?server={}".format(pubg_id,pubg_server)
         
         soup = BeautifulSoup(requests.get(pubg_link).text,"html.parser")
         pubg_hash = soup.find("div", attrs={"data-user_id": True}) # check attribute
